@@ -1,0 +1,22 @@
+
+To Do:
+
+» User Pages
+	✓ email alert signup
+	✓ transaction log
+	✓ make email work (including weekend check)
+	✓ cronjob for email
+	¤ add logout
+
+» Admin Pages
+	✓ allow health set only between midnight and 9a
+	¤ check if health set
+	✓ make email work
+	✓ graphs
+	✓ protect directory
+
+» Backend Scripts
+	✓ production
+	✓ set health
+	✓ write to herd summary
+	¤ check end-dates

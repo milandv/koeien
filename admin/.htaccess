@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "admin"
+AuthUserFile "/home/milandev/.htpasswds/public_html/grazingcows.org/admin/passwd"
+require valid-user
