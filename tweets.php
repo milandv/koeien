@@ -53,7 +53,7 @@ if ($commons_day > ($first_tweet_day + 4) && $commons_day <= ($first_tweet_day +
 
 echo <<< EOT
 <div id="tweet" class="tweet">
-<p><span class="tweetimg"><img src="img/cowtweet.png"></span><span class="tweettxt"><strong>$twitter_name</strong> <span style="color: #aaa;">@TheCommons • $tweet_date</span><br/>New study shows record high $commons_size cows on the commons today. Avg farmer has $avg_herd cows. #cownting</span>
+<p><span class="tweetimg"><img src="img/cowtweet.png"></span><span class="tweettxt"><strong>$twitter_name</strong> <span style="color: #aaa;">@TheCommons • $tweet_date</span><br/>New study shows record high $commons_size cows on the commons today. Avg farmer has $avg_herd cows. #cowntingcows</span>
 <span style="clear: both;">&nbsp;</span>
 </p>
 </div>
