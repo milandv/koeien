@@ -49,10 +49,10 @@
 
 	$new_per_capacity = number_format(100*$new_commons_size/$capacity);
 	if ($new_per_capacity>100) {
-		$adjustment_factor = (300*300 - ($new_per_capacity - 100)*($new_per_capacity-100))/(300*300);
+		$adjustment_factor = (150*150 - ($new_per_capacity - 100)*($new_per_capacity-100))/(150*150);
 		$suggested_health = $current_global_health * $adjustment_factor;
 	} elseif ($new_per_capacity<100) {
-		$adjustment_factor = 2-(300*300 - (100-$new_per_capacity)*(100-$new_per_capacity))/(300*300);
+		$adjustment_factor = 2-(150*150 - (100-$new_per_capacity)*(100-$new_per_capacity))/(150*150);
 		$suggested_health = $current_global_health * $adjustment_factor;
 		if ($suggested_health>100) { $suggested_health=100; }
 	} else {
