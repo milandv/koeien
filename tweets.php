@@ -77,5 +77,24 @@ echo <<< EOT
 </div>
 EOT;
 }
+
+## TWEET 3
+if ($commons_day > ($first_tweet_day + 20) && $commons_day <= ($first_tweet_day + 25) && $instance_id==12) {
+
+	# find the size of the commons
+	$qry = mysql_query("SELECT DATE_FORMAT(ts,'%b %e') as tweet_date, commons_size FROM commons_instances JOIN commons_global_stats USING (instance_id) WHERE ts>=start_date + INTERVAL ($first_tweet_day + 7) DAY AND instance_id=$instance_id ORDER BY ts LIMIT 1");
+	while ($tweet_row=mysql_fetch_array($qry)) {
+		$tweet_date = $tweet_row['tweet_date'];
+		$commons_size = $tweet_row['commons_size'];
+	}
+
+echo <<< EOT
+<div id="tweet" class="tweet">
+<p><span class="tweetimg"><img src="img/cowtweet.png"></span><span class="tweettxt"><strong>$twitter_name</strong> <span style="color: #aaa;">@TheCommons • $tweet_date</span><br/>The TaxMan Mooeth! Commons taxes being levied as of today!<br />If you owe, you'll get an email. Or check your tax bill <a href='mytaxes.php?h=$hash'>here</a>. #FarmingIsTaxing</span>
+<span style="clear: both;">&nbsp;</span>
+</p>
+</div>
+EOT;
+}
 ?>
 

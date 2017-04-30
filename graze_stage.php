@@ -36,6 +36,12 @@
 		$cash_on_hand = number_format($cash_row['cash']);
 	}
 
+	// hash for taxes
+	$qry = mysql_query("SELECT hash FROM commons_users WHERE user_id=$user_id LIMIT 1");
+	while ($hash_row = mysql_fetch_array($qry)) {
+		$hash = $hash_row[0];
+	}
+
 	// herd overview
 	$qry = mysql_query("SELECT herd_size, avg_health FROM commons_herds WHERE user_id=$user_id ORDER BY ts DESC LIMIT 1");
 	while ($herd_row = mysql_fetch_array($qry)) {
