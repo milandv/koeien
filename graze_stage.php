@@ -5,7 +5,7 @@
 	$instance_id = $_SESSION['SESS_INSTANCE_ID'];
 	$qry = mysql_query("SELECT 1 FROM commons_instances WHERE TIME(now()+ INTERVAL (6 + timezone) HOUR)<'09:15' AND instance_id=$instance_id");
 	if (mysql_num_rows($qry) > 0) {
-		header("Location: outtopasture.php");
+	#	header("Location: outtopasture.php");
 	}
 
 
@@ -192,7 +192,7 @@
 	<h1><?PHP echo $commons_name ?> &nbsp;&nbsp; <img src="img/commons_grass<?PHP echo $grass_level ?>.png"></h1>
 </div>
 
-<?PHP include 'tweets.php'; ?>
+<?PHP include 'tweets_stage.php'; ?>
 
 <div id="top">
 <p style="text-align:justify">Welcome farmer <?PHP echo "$_SESSION[SESS_LAST_NAME]"; ?>. Today is <strong>Day <?PHP echo $commons_day ?></strong>. Please set the number of cows you would like to send to pasture below. If you send more than you currently own, you will automatically buy as many cows as you can afford to make up the difference. If you send fewer than you currently own, you will automatically sell off the excess. You must send at least one cow. Happy farming, and good luck.</p>

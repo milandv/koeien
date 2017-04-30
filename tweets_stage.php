@@ -8,9 +8,7 @@ $twitter_name = str_replace(" ", "", $commons_name);
                 $first_tweet_day = $instance_row['first_tweet_day'];
         }
 
-#for debugging
-#$first_tweet_day=$first_tweet_day-1;
-
+## TWEET 1
 if ($commons_day > $first_tweet_day && $commons_day<=($first_tweet_day+4)) {
 
 	# find the price of milk
@@ -35,6 +33,7 @@ EOT;
 
 }
 
+## TWEET 2
 if ($commons_day > ($first_tweet_day + 4) && $commons_day <= ($first_tweet_day + 8)) {
 
 	# find the size of the commons
@@ -53,7 +52,26 @@ if ($commons_day > ($first_tweet_day + 4) && $commons_day <= ($first_tweet_day +
 
 echo <<< EOT
 <div id="tweet" class="tweet">
-<p><span class="tweetimg"><img src="img/cowtweet.png"></span><span class="tweettxt"><strong>$twitter_name</strong> <span style="color: #aaa;">@TheCommons • $tweet_date</span><br/>New study shows record high $commons_size cows on the commons today. Avg farmer has $avg_herd cows. #cownting</span>
+<p><span class="tweetimg"><img src="img/cowtweet.png"></span><span class="tweettxt"><strong>$twitter_name</strong> <span style="color: #aaa;">@TheCommons • $tweet_date</span><br/>New study shows record high $commons_size cows on the commons today. Avg farmer has $avg_herd cows. #cowntingcows</span>
+<span style="clear: both;">&nbsp;</span>
+</p>
+</div>
+EOT;
+}
+
+## TWEET 3
+if ($commons_day > ($first_tweet_day + 8) && $commons_day <= ($first_tweet_day + 12)) {
+
+	# find the size of the commons
+	$qry = mysql_query("SELECT DATE_FORMAT(ts,'%b %e') as tweet_date, commons_size FROM commons_instances JOIN commons_global_stats USING (instance_id) WHERE ts>=start_date + INTERVAL ($first_tweet_day + 7) DAY AND instance_id=$instance_id ORDER BY ts LIMIT 1");
+	while ($tweet_row=mysql_fetch_array($qry)) {
+		$tweet_date = $tweet_row['tweet_date'];
+		$commons_size = $tweet_row['commons_size'];
+	}
+
+echo <<< EOT
+<div id="tweet" class="tweet">
+<p><span class="tweetimg"><img src="img/cowtweet.png"></span><span class="tweettxt"><strong>$twitter_name</strong> <span style="color: #aaa;">@TheCommons • $tweet_date</span><br/>Increasing concern about declining milk production and cow health has heads scratching.</span>
 <span style="clear: both;">&nbsp;</span>
 </p>
 </div>
