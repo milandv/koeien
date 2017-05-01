@@ -159,10 +159,11 @@ while ($coh_row = mysql_fetch_array($coh_qry)) {
 	$coh = $coh_row['cash'];
 }
 
-$invoice_qry = mysql_query("SELECT invoice_id, cuto.ts, CASE WHEN cuto.ts<DATE(NOW())-INTERVAL 2 DAY THEN 1 ELSE 0 END as past_due, user_id, avg_herd, revenue, taxable_revenue, tax, remaining FROM commons_users_taxes_owed cuto JOIN commons_users cu USING(user_id) WHERE cu.hash='$hash'");
+$invoice_qry = mysql_query("SELECT invoice_id, cuto.ts, cuto.ts + INTERVAL 2 DAY as due_date, CASE WHEN cuto.ts<DATE(NOW())-INTERVAL 2 DAY THEN 1 ELSE 0 END as past_due, user_id, avg_herd, revenue, taxable_revenue, tax, remaining FROM commons_users_taxes_owed cuto JOIN commons_users cu USING(user_id) WHERE cu.hash='$hash'");
 while ($row = mysql_fetch_array($invoice_qry)) {
 	$invoice_id = $row['invoice_id'];
 	$ts = $row['ts'];
+	$due_date = $row['due_date'];
 	$avg_herd = $row['avg_herd'];
 	$revenue = number_format($row['revenue'],2);
 	$taxable_revenue = number_format($row['taxable_revenue'],2);
@@ -189,7 +190,7 @@ while ($row = mysql_fetch_array($invoice_qry)) {
 	} elseif ($row['past_due']==1) {
 		$status = 'past due';
 	} else {
-		$status = 'current';
+		$status = "due $due_date";
 	}
 
 echo "
@@ -220,7 +221,7 @@ echo "
 </tr>
 
 <tr>
- <td colspan="8"><span style="font-size:0.7em"><i>Note: all past due invoices have a 7.6% finance fee applied to them</i></td>
+ <td colspan="8"><span style="font-size:0.7em"><i>Note: all past due invoices have a 7.6% finance fee applied to them per tax period</i></td>
 </tr>
 </table>
 
