@@ -1,4 +1,4 @@
-        body    {font-family:Inika}
+        body    {font-family:Inika;background: url(img/background.svg);background-repeat: no-repeat;background-size: 100%}
         h1      {font-family:'Bowlby One SC'}
         #wrapper        {width:900px;
                         margin:auto}

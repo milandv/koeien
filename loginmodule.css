@@ -3,7 +3,23 @@ body {
 	color: #666666;
 	margin: 0px;
 	padding: 20px 10px 0px;
+	background: url(img/background.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
+
+form {
+	height: 400px;
+	background-image: url(img/board.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 400px 400px;
+}
+
+table {
+	padding-top:100px;
+}
+
 .textfield {
 	font-size: 11px;
 	color: #333333;
