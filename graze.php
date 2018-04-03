@@ -101,8 +101,8 @@
 <head>
  <title><?PHP echo $commons_name ?></title>
  <style>
-	@import url(http://fonts.googleapis.com/css?family=Bowlby+One+SC);
-	@import url(http://fonts.googleapis.com/css?family=Inika:400,700);
+	@import url(https://fonts.googleapis.com/css?family=Bowlby+One+SC);
+	@import url(https://fonts.googleapis.com/css?family=Inika:400,700);
  </style>
 
  <link rel="stylesheet" type="text/css" href="css/style_graze.css">
@@ -161,7 +161,7 @@
 <div id="wrapper">
 
 <div id="header">
-	<h1><?PHP echo $commons_name ?> &nbsp;&nbsp; <img src="img/commons_grass<?PHP echo $grass_level ?>.png"></h1>
+	<h1><?PHP echo $commons_name ?> &nbsp;&nbsp; <img src="img/grass<?PHP echo $grass_level ?>.svg"></h1>
 </div>
 
 <?PHP include 'tweets.php'; ?>
@@ -191,7 +191,7 @@
 	<form action="graze.php" method="POST">
 	<table>
 	<tr>
-		<td><img src="img/man.cow.100.png" /></td>
+		<td><img src="img/cowhead.svg" /></td>
 		<td style="text-align:center">
 		Yesterday you grazed <?PHP echo $herd_size ?> cows<br />
 		How many would you like to graze today: <br />
@@ -234,15 +234,15 @@
 	<h2>Farm</h2>
 	<table>
 	<tr>
-		<td><img src="img/dollar.100.png" /></td>
+		<td><img src="img/money.svg" /></td>
 		<td>&#36; <?PHP echo $cash_on_hand ?></td>
 	</tr>
 	<tr>
-		<td><img src="img/cows.100.png" /></td>
+		<td><img src="img/cowmain.svg" /></td>
 		<td><?PHP echo $herd_size ?> cows</td>
 	</tr>
 	<tr>
-		<td><img src="img/heart.100.png" /></td>
+		<td><img src="img/heart.svg" /></td>
 		<td><?PHP echo $herd_avg_health ?>% health</td>
 	</tr>
 
@@ -263,7 +263,7 @@
 			$buying_amount = $last_order - $herd_size;
 			echo <<<EOT
 			<tr>
-				<td><img src="img/cow.green.100.png" /></td>
+				<td><img src="img/cowtag.svg" /></td>
 				<td>+$buying_amount cows</td>
 				<td colspan="2"><i>(pending for tomorrow)</i></td>
 			</tr>
@@ -272,7 +272,7 @@ EOT;
 			$selling_amount = $herd_size - $last_order;
 			echo <<<EOT
 			<tr>
-				<td><img src="img/cow.red.100.png" /></td>
+				<td><img src="img/cowsold.svg" /></td>
 				<td>-$selling_amount cows</td>
 				<td colspan="2"><i>(pending for tomorrow)</i></td>
 			</tr>
@@ -297,7 +297,7 @@ EOT;
 				}
 				echo <<<EOT
 		<tr>
-			<td><img src="img/bottle.100.png" /></td>
+			<td><img src="img/bottle.svg" /></td>
 			<td>$liters L</td>
 			<td>&#36; $amt</td>
 			<td>day $day</td>
@@ -313,7 +313,7 @@ EOT;
 					}
 					echo <<<EOT
 			<tr>
-				<td><img src="img/cow.green.100.png" /></td>
+				<td><img src="img/cowtag.svg" /></td>
 				<td>+$bought_cows cows</td>
 				<td>&#36; -$bought_amt </td>
 				<td>day $day</td>
@@ -329,7 +329,7 @@ EOT;
 					}
 					echo <<<EOT
 			<tr>
-				<td><img src="img/cow.red.100.png" /></td>
+				<td><img src="img/cowsold.svg" /></td>
 				<td>-$sold_cows cows</td>
 				<td>&#36; $sold_amt</td>
 				<td>day $day</td>
