@@ -1,4 +1,13 @@
-body	{margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; background-color: #FFFFFE}
+body	{
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	background-color: #FFFFFE;
+	/*
+	background: url(img/background.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    */
+}
 
 #wrapper {
 	width: 930px;

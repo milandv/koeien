@@ -3,7 +3,10 @@ body {
 	color: #666666;
 	margin: 0px;
 	padding: 20px 10px 0px;
+	background: url(img/background.svg) no-repeat center center fixed;
+	background-size: cover;
 }
+
 .textfield {
 	font-size: 11px;
 	color: #333333;
@@ -32,3 +35,4 @@ th {
 	font-weight: bold;
 	text-align: left;
 }
+
