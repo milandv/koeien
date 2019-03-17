@@ -26,7 +26,7 @@
 
         form div                            { overflow: hidden; margin: 0 0 5px 0; }
         input[type=text]                    { float: left; width: 40px; font: bold 20px Helvetica, sans-serif; padding: 3px 0 0 0; text-align: center; }
-        .button                             { margin: 0 0 0 5px; text-indent: -9999px; cursor: pointer; width: 29px; height: 29px; float: left; text-align: center; background: url(img/buttons.png) no-repeat; }
+        .button                             { margin: 0 0 0 5px; text-indent: -9999px; cursor: pointer; width: 29px; height: 29px; float: left; text-align: center; background: url(../img/buttons.png) no-repeat; }
         .dec                                { background-position: 0 -29px; }
 
         #order_submitted        {color: red;}

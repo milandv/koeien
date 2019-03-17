@@ -169,7 +169,7 @@ while ($row = mysql_fetch_array($invoice_qry)) {
 	$taxable_revenue = number_format($row['taxable_revenue'],2);
 	$tax = number_format($row['tax'],2);
 	$remaining = number_format($row['remaining'],2);
-	$total_due = $total_due + $remaining;
+	$total_due = $total_due + $row['remaining'];
 
 	if ($avg_herd>20 && $avg_herd<=50) {
 		$tax_rate='5%';
@@ -192,6 +192,8 @@ while ($row = mysql_fetch_array($invoice_qry)) {
 	} else {
 		$status = "due $due_date";
 	}
+
+$total_due_display=number_format($total_due,2);
 
 echo "
 <tr $style>
@@ -217,7 +219,7 @@ echo "
  <td></td>
  <td></td>
  <td></td>
- <td><br /><b><?php echo "$total_due"; ?></b></td>
+ <td><br /><b><?php echo "$total_due_display"; ?></b></td>
 </tr>
 
 <tr>

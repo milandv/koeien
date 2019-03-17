@@ -28,6 +28,20 @@
 		$lastname = $row['lastname'];
 		$email = $row['email'];
 	}
+
+	if ($_POST["submit"]) {
+		if ($_POST["dothis"]==1) {
+			$qry= mysql_query("UPDATE commons_users SET instance_id=0 WHERE user_id=$user_id");
+			$update_done=1;
+		}
+
+		if ($_POST["dothis"]==99) {
+			$qry= mysql_query("UPDATE commons_users SET instance_id=$instance_id WHERE user_id=$user_id");
+			$update_done=0;
+		}
+
+	}
+
 ?>
 
 <html>
@@ -55,6 +69,22 @@
 
 <h3>Details for <?PHP echo "$firstname $lastname"; ?></h3>
 <p>[student id = <?PHP echo $student_id ?> | email = <?PHP echo $email ?>]</p>
+
+<form action="" method="POST">
+<?PHP 
+if (!$update_done) {
+	echo '<input type="hidden" name="dothis" value="1">';
+	echo '<span style="color:red">Inactivate this user: <input type="submit" value="Submit" name="submit"></span>';
+} else {
+	echo '<input type="hidden" name="dothis" value="99">';
+	echo '<span style="color:green">Restore this user: <input type="submit" value="Submit" name="submit"></span>';
+  	echo '<p><span style="color:red">USER HAS BEEN INACTIVATED</span></p>';
+}
+?>
+</form>
+
+
+
 <table class="nonmain">
 <tr>
  <th>Commons Day</th>

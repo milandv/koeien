@@ -1,0 +1,1 @@
+SELECT ci.name, firstname, lastname, student_id, COUNT(DISTINCT DATE(cll.ts)) as logins FROM commons_instances ci JOIN commons_users cu USING(instance_id) JOIN commons_login_log cll USING(user_id) WHERE instance_id IN (14) GROUP BY 1,2,3,4 ORDER BY instance_id, student_id LIMIT 20;

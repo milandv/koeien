@@ -1,0 +1,210 @@
+name	firstname	lastname	student_id	COUNT(DISTINCT DATE(cll.ts))
+Happy cows	1	1	1	1
+Happy cows	10	10	10	8
+Happy cows	11	11	11	8
+Happy cows	12	12	12	8
+Happy cows	Mattanjah	devries	123	3
+Happy cows	pietsie	cato	123a	6
+Happy cows	13	13	13	8
+Happy cows	Cass	Oswald	20353757	1
+Happy cows	3	3	3	6
+Happy cows	Demetrious	Lloyd	3055779	63
+Happy cows	Samuel	Simmons	3099595	64
+Happy cows	Jessica	Wang	3111606	37
+Happy cows	Milan	de Vries	314159265	16
+Happy cows	Evan	Clark	3149945	5
+Happy cows	Sirish	Narayanan	3157138	36
+Happy cows	Andrew	Foster	3211612	28
+Happy cows	Tristan	Chan	3285426	20
+Happy cows	Jessica	VanWagoner	3290350	60
+Happy cows	Jiaxuan	Lyu	3290921	45
+Happy cows	Eric	Stone	3321726	66
+Happy cows	Bijan	Ostowari	3326295	37
+Happy cows	Jiayi	Tian	3381316	19
+Happy cows	Zach	Neary	3407269	13
+Happy cows	Steven	Bustillos	3444007	60
+Happy cows	Trenton	Carlson	3497500	52
+Happy cows	Aman	Patheja	3516721	60
+Happy cows	Tyler	Wienecke	3524527	29
+Happy cows	Liam	McGrenaghan	3528429	53
+Happy cows	Cynthia	Reyes	3545068	40
+Happy cows	Conor	Kelly	3557964	62
+Happy cows	Carolina	Espinoza	3564101	4
+Happy cows	Mina	Faust	3572104	45
+Happy cows	Andre	Guan Zhou	3640489	48
+Happy cows	Qiao	He	3641297	26
+Happy cows	Nicole	Martinez	3794898	73
+Happy cows	4	4	4	7
+Happy cows	Hefan	Zhang	4310173	38
+Happy cows	Hugo	Dumonteil	4518031	16
+Happy cows	Logan	Gonzalez	4591343	32
+Happy cows	Chloe	Miossec	4606331	15
+Happy cows	kord	boniadi	4784427	20
+Happy cows	Sammi	Lambert	4839841	45
+Happy cows	Mahsa	Sadri	4850855	25
+Happy cows	Davis	Peralta	4854469	42
+Happy cows	Wilson	Chen	4858650	63
+Happy cows	Chung	Kwok	4867206	44
+Happy cows	Jake	Hunter	4867834	62
+Happy cows	Mingzi	Wang	4870952	56
+Happy cows	Airel	Elgincolin	4877106	28
+Happy cows	HOYEON	KIM	4878500	19
+Happy cows	Junnichi	Mijares	4888400	56
+Happy cows	JIYOUNG	KIM	4888590	21
+Happy cows	yubin	huang	4964565	17
+Happy cows	Anthony	Di Grandi	4964912	55
+Happy cows	Zhaoyuan	Tang	4967576	63
+Happy cows	Adrian	Sirovica	4972709	68
+Happy cows	Daniel	Jaramillo	4989240	15
+Happy cows	Bradley	Kao	4992814	67
+Happy cows	Reeeeeee	Normies	5	1
+Happy cows	Roberto	Chavez	5007737	42
+Happy cows	Carlos	Quintanilla	5008180	6
+Happy cows	Minna	Lee	5020151	67
+Happy cows	Jimmy	Nguyen	5044334	46
+Happy cows	1	1	6	6
+Happy cows	Casey	Spinner	6250088	45
+Happy cows	Austin	Jacobs	6449284	14
+Happy cows	Alex	Voloshko	6571954	45
+Happy cows	Blanca	Gonzalez	6675680	26
+Happy cows	Pedram	Shafiei Jahani	6686414	18
+Happy cows	Liam	Bartling	6857411	30
+Happy cows	7	7	7	11
+Happy cows	Christopher	Anderson	7128192	59
+Happy cows	Garret	Olson	714749 9	50
+Happy cows	Eduardo	Morales	7159957	32
+Happy cows	Amairany	Benitez	7169170	30
+Happy cows	Edwin	Camacho	7177694	45
+Happy cows	Jordan	Lund	7183999	58
+Happy cows	Madeline	Brody	7184625	65
+Happy cows	Lorena	Martinez	7191661	48
+Happy cows	Charles	Ragudos	7198427	46
+Happy cows	Quan	Bui	7203938	35
+Happy cows	Karel	Moersalim	7247430	2
+Happy cows	Hoi Chi	Kwok	7275829	57
+Happy cows	Sonya	Randlewise	7285893	17
+Happy cows	Kaitlynn	Abrams	7347164	66
+Happy cows	Sabrina	Franciosa	7599467	49
+Happy cows	James	Zottola	7610132	18
+Happy cows	Ethan	Barber	7646912	42
+Happy cows	Minghong	Xu	7648405	66
+Happy cows	Wenqi	Wang	7658644	64
+Happy cows	Sunny	Soma	7670748	66
+Happy cows	Steven	Martinez	7677909	71
+Happy cows	Justin	Tak	7705585	61
+Happy cows	Osvaldo	Serrato	7711138	71
+Happy cows	Zixuan	Guo	7720915	71
+Happy cows	Natalie	Radrigan	7726144	54
+Happy cows	Linye	Chen	7728942	64
+Happy cows	Anthony	Pirounakis	7741226	70
+Happy cows	Eileen	Liu	7741945	68
+Happy cows	Cody	O'Neal	7745326	71
+Happy cows	Jingyi	Huang	7746753	39
+Happy cows	yesenia	cardenas	7749047	53
+Happy cows	Maya	Rao	7750078	61
+Happy cows	Robert	Lothringer	7750706	56
+Happy cows	Kristine	Legaspi	7771314	66
+Happy cows	Brandon	Malady	7780612	33
+Happy cows	joseph	woods	7782626	53
+Happy cows	Kevin	Shultz	7784549	64
+Happy cows	Tiffany	Cedeno	7788490	11
+Happy cows	Bianca	Gomez	7812738	30
+Happy cows	Yuge	Hu	7813066	30
+Happy cows	Alice	Chen	7822802	52
+Happy cows	Erik	Le	7830581	64
+Happy cows	Mitchell	Velicer	7894801	72
+Happy cows	Osvaldo	Ordonez	7929011	64
+Happy cows	andrew	walter	7953565	43
+Happy cows	Oscar (Haoyang)	Wu	7956857	49
+Happy cows	Chris	Szikszai	7982325	58
+Happy cows	Melissa	Serrano	7996663	72
+Happy cows	Emilie	Aghajani	7998933	66
+Happy cows	8	8	8	8
+Happy cows	Reed	Loose	8026379	46
+Happy cows	Maddi	Micallef	8031387	62
+Happy cows	Jillian	Trimble	8048738	40
+Happy cows	Jorge	Villalobos	8095531	15
+Happy cows	Can	Cao	8144495	53
+Happy cows	Megan	Wakefield	8177925	73
+Happy cows	Ryan	MacDonald	8198772	65
+Happy cows	Michael	Belleville	8205742	40
+Happy cows	Sonia	Chimni	8212375	55
+Happy cows	Cesar	Osuna	8294761	19
+Happy cows	Daniel	Essert	8341331	26
+Happy cows	Catrina	Wilson	8346546	68
+Happy cows	Hannah	Bone	8364358	27
+Happy cows	Alvin	Ha	8377624	65
+Happy cows	Shane	Cooper	8378739	58
+Happy cows	Michael	Weston	8442162	74
+Happy cows	Christina	Mitine	8485450	71
+Happy cows	Burton	Sickler	8520173	50
+Happy cows	Brian	Sickinger	8531162	33
+Happy cows	Marvin	Riedl	8534513	44
+Happy cows	Jose	Hernandez	8570210	37
+Happy cows	Ramsey	Issa	8582389	34
+Happy cows	Vanessa	Figuera pizarro	8583346	73
+Happy cows	Michelle	Cady	8583957	44
+Happy cows	Hoplee	Pak	8615700	25
+Happy cows	Ellie	Puente	8626079	73
+Happy cows	Meng Hao	Lee	8642829	27
+Happy cows	penghao	zhang	8713778	21
+Happy cows	Carlos	Quintanilla	888831319	6
+Happy cows	Kevin	Lofgren	8896839	45
+Happy cows	Isaac	Freeling	8949976	41
+Happy cows	Nianmin	Hong	8990061	59
+Happy cows	Ruoshui	Li	8992349	22
+Happy cows	Miguel	Ruiz	8993685	62
+Happy cows	9	9	9	8
+Happy cows	Minkang	Wei	9314881	56
+Happy cows	Jialiang	Zhang	9328444	67
+Happy cows	Brandon	Light	9419516	61
+Happy cows	Ngan	Nguyen	9438474	19
+Happy cows	Valerie	Lensch	9453689	68
+Happy cows	Elaine	Bunyan	9456724	70
+Happy cows	Julan	Prasad	9488099	32
+Happy cows	Ruby	Korpics	9508300	1
+Happy cows	Christian	Fulgentes	9542101	16
+Happy cows	Daniel	Baldwin	9556077	52
+Happy cows	Jesus	Silva	9580747	17
+Happy cows	Jacob	Horne	9587973	67
+Happy cows	Austin	Ung	9594128	64
+Happy cows	Jessica	Andrews	9598590	71
+Happy cows	Ryan	Rodriguez	9622952	54
+Happy cows	Rebecca	Abel	9661810	70
+Happy cows	Cynthia	Meyers	9694878	58
+Happy cows	XINXUN	ZHU	9723404	34
+Happy cows	Yijie	Li	9724428	18
+Happy cows	Adrian	Cortez	9730193	64
+Happy cows	Yu	Qiu	9731548	25
+Happy cows	Isaac	Zakaria	9793134	67
+Happy cows	Ali	Mahdi	9821349	69
+Happy cows	Cassandra	Salas	9854670	61
+Happy cows	Taylor	Mulidor	9924754	68
+Happy cows	Miguel	Perez	9955576	15
+Happy cows	Jeffrey	Huynh	9997966	49
+hoax or disaster farm	14	14	14	7
+hoax or disaster farm	jake	johe	1983423	1
+hoax or disaster farm	20	20	20	1
+hoax or disaster farm	30	30	30	1
+hoax or disaster farm	Yang	Li	3390291	2
+hoax or disaster farm	Curtis	Ho	3705001	12
+hoax or disaster farm	Emily	Imperato	3727229	7
+hoax or disaster farm	Thomas	Gean	3746021	21
+hoax or disaster farm	Lindsey	Schloetter	3781077	20
+hoax or disaster farm	40	40	40	1
+hoax or disaster farm	David	Joe	4195749	13
+hoax or disaster farm	Ethan	Jones	4288700	8
+hoax or disaster farm	Judy	Kim	4348504	14
+hoax or disaster farm	Devon	Cooper	4555405	24
+hoax or disaster farm	Wesley	Denstaedt	4668729	11
+hoax or disaster farm	Kellen	Liu	4730248	18
+hoax or disaster farm	Kyle	San Juan	4783346	14
+hoax or disaster farm	bob	bobberson	6969696	1
+hoax or disaster farm	Jonathan	Leung	7133309	20
+hoax or disaster farm	Yvette	Roberts	7295819	19
+hoax or disaster farm	cliff	hardys	8349024	2
+hoax or disaster farm	Code	Ivana	8739042	1
+hoax or disaster farm	Rebecca	Nishide	8875023	22
+hoax or disaster farm	Irma	Hernandez	8904773	18
+hoax or disaster farm	boer	de vries	94	6
+hoax or disaster farm	Elisabeth	Nordnes	X290368	22

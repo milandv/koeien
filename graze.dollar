@@ -19,17 +19,15 @@
 		$default_graze = $instance_row['default_graze'];
 	}
 
-	$user_id = $_SESSION['SESS_ID'];
-
         // grab global health parameter
         $qry = mysql_query("SELECT global_health FROM commons_global_stats WHERE instance_id=$instance_id AND ts<='$today' ORDER BY ts DESC LIMIT 1");
         while ($row = mysql_fetch_array($qry)) { $global_health = $row['global_health']; }
 
-        $grass_level = ceil($global_health/10);
-        if ($grass_level>9) {$grass_level=9;}
-        if ($grass_level<1) {$grass_level=1;}
+	$grass_level = ceil($global_health/10);
+	if ($grass_level>9) {$grass_level=9;}
+	if ($grass_level<1) {$grass_level=1;}
 
-        $user_id = $_SESSION['SESS_ID'];
+	$user_id = $_SESSION['SESS_ID'];
 
 	// cash on hand
 	$qry = mysql_query("SELECT cash FROM commons_users_cash_summary WHERE user_id=$user_id ORDER BY ts DESC LIMIT 1");
@@ -37,6 +35,12 @@
 		$max_cows = floor($cash_row['cash']/1000);
 		$cash_on_hand = number_format($cash_row['cash']);
 	}
+
+        // hash for taxes
+        $qry = mysql_query("SELECT hash FROM commons_users WHERE user_id=$user_id LIMIT 1");
+        while ($hash_row = mysql_fetch_array($qry)) {
+                $hash = $hash_row[0];
+        }
 
 	// herd overview
 	$qry = mysql_query("SELECT herd_size, avg_health FROM commons_herds WHERE user_id=$user_id ORDER BY ts DESC LIMIT 1");
@@ -99,40 +103,9 @@
  <style>
 	@import url(http://fonts.googleapis.com/css?family=Bowlby+One+SC);
 	@import url(http://fonts.googleapis.com/css?family=Inika:400,700);
-
-	body	{font-family:Inika}
-	h1	{font-family:'Bowlby One SC'}
-	#wrapper	{width:900px;
-			margin:auto}
-	#top		{margin-bottom:4em}
-	#narrow		{width:495px;
-			float:left}
-	#wide		{width:395px;
-			float:right}
-	.box		{padding:1ex;
-			border:1px solid black;
-			margin-bottom:2em;}
-	.box h2		{margin-top:-1em;
-			margin-left:5px;
-			width:100px;
-			background:white;
-			text-align:center;}
-	table		{width:100%}
-	//td + td		{text-align:right}
-	
-	#submit		{background:black;color:white;font-weight:bold;font-family:inerit;font-size:125%;border:5px double white;cursor: hand; cursor: pointer;}
-	#submit:hover	{background:#888;}
-
-	#pasture	{border:1px solid black;width:3em;font-family:inherit}
-
-	form div                            { overflow: hidden; margin: 0 0 5px 0; }
-	input[type=text]                    { float: left; width: 40px; font: bold 20px Helvetica, sans-serif; padding: 3px 0 0 0; text-align: center; }
-	.button                             { margin: 0 0 0 5px; text-indent: -9999px; cursor: pointer; width: 29px; height: 29px; float: left; text-align: center; background: url(img/buttons.png) no-repeat; }
-	.dec                                { background-position: 0 -29px; }
-
-	#order_submitted	{color: red;}
-	#order_updated	{color: red; text-align: center;}
  </style>
+
+ <link rel="stylesheet" type="text/css" href="css/style_graze.css">
 
  <script src="js/jquery-1.7.1.min.js"></script>
 
@@ -188,8 +161,10 @@
 <div id="wrapper">
 
 <div id="header">
-        <h1><?PHP echo $commons_name ?> <img src="img/commons_grass<?PHP echo $grass_level ?>.png"><img src="img/commons_grass<?PHP echo $grass_level ?>.png"></h1>
+	<h1><?PHP echo $commons_name ?> &nbsp;&nbsp; <img src="img/commons_grass<?PHP echo $grass_level ?>.png"></h1>
 </div>
+
+<?PHP include 'tweets.php'; ?>
 
 <div id="top">
 <p style="text-align:justify">Welcome farmer <?PHP echo "$_SESSION[SESS_LAST_NAME]"; ?>. Today is <strong>Day <?PHP echo $commons_day ?></strong>. Please set the number of cows you would like to send to pasture below. If you send more than you currently own, you will automatically buy as many cows as you can afford to make up the difference. If you send fewer than you currently own, you will automatically sell off the excess. You must send at least one cow. Happy farming, and good luck.</p>
