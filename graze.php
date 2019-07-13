@@ -3,11 +3,10 @@
 	require('cgi-bin/connect.inc');
 
 	$instance_id = $_SESSION['SESS_INSTANCE_ID'];
-	$qry = mysql_query("SELECT 1 FROM commons_instances WHERE TIME(now()+ INTERVAL (6 + timezone) HOUR)<'09:15' AND instance_id=$instance_id");
+	$qry = mysql_query("SELECT 1 FROM commons_instances WHERE instance_id=$instance_id"); // TIME(now()+ INTERVAL (6 + timezone) HOUR)<'09:15' AND TODO
 	if (mysql_num_rows($qry) > 0) {
-		header("Location: outtopasture.php");
+		//header("Location: outtopasture.php");
 	}
-
 
 	$qry = mysql_query("SELECT name, start_date, DATE(now() + INTERVAL(6 + timezone) HOUR) as today, DATEDIFF(now() + INTERVAL (6 + timezone) HOUR, start_date)+1 as day, timezone, default_graze FROM commons_instances WHERE instance_id=$instance_id");
 	while ($instance_row = mysql_fetch_array($qry)) {
@@ -49,13 +48,17 @@
 		$herd_avg_health = number_format($herd_row['avg_health']);
 		$max_graze = $max_cows + $herd_size;
 	}
+	
+	// Declare order vars
+	$order_updated = 0;
+	$order_submitted = 0;
 
 	//check for today's submission
 	$qry = mysql_query("SELECT * FROM commons_grazing_orders WHERE user_id=$user_id AND ts='$today'");
 	$order_check = mysql_num_rows($qry);
 	if ($order_check>0) { $order_submitted=1; }
-	if ($_POST["submit"]) {
-		$order = $_POST["pasture"];
+	if (isset($_POST) && array_key_exists("submit", $_POST) && $_POST['submit']) {
+		$order = $_POST['pasture'];
 		if ($order>=0 && $order<=$max_graze) {
 			if ($order_check>0) {
 				$qry = mysql_query("UPDATE commons_grazing_orders SET cows=$order WHERE user_id=$user_id AND ts = '$today'");
@@ -85,21 +88,67 @@
 		$last_order = 0;
 	}
 
-	if ($_POST["start_reminders"]) {
+	if (isset($_POST) && array_key_exists("start_reminders", $_POST) && $_POST['start_reminders']) {
 		$qry = mysql_query("INSERT INTO commons_users_alerts (user_id) VALUES ($user_id)");
 	}
-	if ($_POST["stop_reminders"]) {
+	if (isset($_POST) && array_key_exists("stop_reminders", $_POST) && $_POST['stop_reminders']) {
 		$qry = mysql_query("DELETE FROM commons_users_alerts WHERE user_id=$user_id");
 	}
 
 	$qry = mysql_query("SELECT 1 FROM commons_users_alerts WHERE user_id=$user_id");
 	$alert_check = mysql_num_rows($qry);
+	
+	// Submit post data if present, prevent resubmission
+	if(isset($_POST['post_text']) && strlen($_POST['post_text']) > 0) {
+		$link = filter_var($_POST['img_link'], FILTER_VALIDATE_URL);
+		if(!$link) { $link = ''; }
+		
+		$sql = "INSERT INTO posts(post_title, post_text, img_link, post_date, post_author, commons_instance)
+		VALUES ('" . mysql_real_escape_string($_POST['post_title']) . "',
+		'" . mysql_real_escape_string($_POST['post_text']) . "',
+		'" . $link . "',
+		NOW(), '" . $user_id . "', '" . $instance_id . "')";
+		
+		$result = mysql_query($sql);
+		
+		if(!$result) {
+			echo '<p class="post-success">Error submitting post</p>'; //todo
+		}
+		
+		else {
+			header('Location: ' . $_SERVER['REQUEST_URI']);
+			exit();		
+		}
+	}
+	
+	// Get instructor status
+	$is_instructor = 0; // default
+
+	$sql = "SELECT
+			is_instructor
+		FROM
+			commons_users
+		WHERE
+			user_id = " . $user_id;
+
+	$result = mysql_query($sql);
+
+	if(!$result) {
+		echo 'Error verifying instructor status';
+	}
+
+	else {
+		$row = mysql_fetch_assoc($result);
+		$is_instructor = $row['is_instructor'];
+	}
 
 ?>
 
 <html>
 <head>
  <title><?PHP echo $commons_name ?></title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
  <style>
 	@import url(https://fonts.googleapis.com/css?family=Bowlby+One+SC);
 	@import url(https://fonts.googleapis.com/css?family=Inika:400,700);
@@ -108,6 +157,7 @@
  <link rel="stylesheet" type="text/css" href="css/style_graze.css">
 
  <script src="js/jquery-1.7.1.min.js"></script>
+ <!-- graze.js included at bottom, after all necessary elements have been rendered -->
 
  <script type="text/javascript">
    $(document).ready(function(){
@@ -167,15 +217,15 @@
 <?PHP include 'tweets.php'; ?>
 
 <div id="top">
-<p style="text-align:justify">Welcome farmer <?PHP echo "$_SESSION[SESS_LAST_NAME]"; ?>. Today is <strong>Day <?PHP echo $commons_day ?></strong>. Please set the number of cows you would like to send to pasture below. If you send more than you currently own, you will automatically buy as many cows as you can afford to make up the difference. If you send fewer than you currently own, you will automatically sell off the excess. You must send at least one cow. Happy farming, and good luck.</p>
+<p class="text_justify">Welcome farmer <?PHP echo "$_SESSION[SESS_LAST_NAME]"; ?>. Today is <strong>Day <?PHP echo $commons_day ?></strong>. Please set the number of cows you would like to send to pasture below. If you send more than you currently own, you will automatically buy as many cows as you can afford to make up the difference. If you send fewer than you currently own, you will automatically sell off the excess. You must send at least one cow. Happy farming, and good luck.</p>
 
 <form action="graze.php" method="POST">
 <?PHP if ($alert_check) { ?>
-<p>You are currently <span style="color: green">signed up</span> for email reminders.
+<p>You are currently <span class="green">signed up</span> for email reminders.
  <input type="submit" name="stop_reminders" value="Stop Reminders">
 </p>
 <?PHP } else { ?>
-<p>You are currently <span style="color: red">not signed up</span> for email reminders. 
+<p>You are currently <span class="red">not signed up</span> for email reminders. 
 <form action="graze.php" method="POST">
  <input type="submit" name="start_reminders" value="Start Reminders">
 </p>
@@ -186,27 +236,28 @@
 
 <div id="narrow">
 
- <div class="box">
+ <div class="box" id="pasture-box">
 	<h2>Pasture</h2>
 	<form action="graze.php" method="POST">
 	<table>
 	<tr>
 		<td><img src="img/cowhead.svg" /></td>
-		<td style="text-align:center">
+		<td class="text_center">
 		Yesterday you grazed <?PHP echo $herd_size ?> cows<br />
 		How many would you like to graze today: <br />
 		<input id="pasture" type="text" name="pasture" value="<?PHP echo $last_order ?>"/> 
 		<div class="inc button">+</div><div class="dec button">-</div>
 		<input id="submit" name="submit" type="submit" Value="Set number"/></td>
-	</tr>
+	</tr> 
 	</table>
+	</form>
 <?PHP if ($order_updated) { ?>
 	<p id="order_updated">Grazing order updated!</p>
 <?PHP } ?>
 <?PHP if ($order_submitted) { ?>
 	<div id="order_submitted">Grazing order for tomorrow is set at <?PHP echo $last_order ?> cows.</div>
 <?PHP } ?>
-	<p style="text-align:center" id="transaction">
+	<p class="text_center" id="transaction">
 <?PHP 
 	if ($herd_size == $last_order) {
 		echo "Currently: no change from yesterday.";
@@ -238,11 +289,31 @@
 		<td>&#36; <?PHP echo $cash_on_hand ?></td>
 	</tr>
 	<tr>
-		<td><img src="img/cowmain.svg" /></td>
+		<td><img src="<?PHP
+		// Use different cow assets for different amounts of cows
+		if($herd_size <= 1) {
+			echo "img/cowmain.svg";
+		}
+		else if($herd_size == 2) {
+			echo "";
+		}
+		// TODO add extra
+		
+		?>"/></td>
 		<td><?PHP echo $herd_size ?> cows</td>
 	</tr>
 	<tr>
-		<td><img src="img/heart.svg" /></td>
+		<td><img src="<?PHP
+		// Use different health assets for different levels
+		if($herd_avg_health >= 90) {
+			echo "img/heart.svg";
+		}
+		else { 
+			echo ""; // TODO
+		}
+		// TODO
+		
+		?>"/></td>
 		<td><?PHP echo $herd_avg_health ?>% health</td>
 	</tr>
 
@@ -346,10 +417,125 @@ EOT;
 ?>
 
  </div>
+ 
+ 
 
 </div>
 
-
-
+<div class="box" id="bulletin">
+	<h2>Bulletin</h2>
+	<div id="posts-wrapper">
+		<table id="posts"> <!-- maybe should put this inside loop TODO -->
+		
+		<?PHP
+		// id, title, text, image link, date, by, commons
+		$sql = "SELECT
+					post_id,
+					post_title,
+					post_text,
+					img_link,
+					post_date,
+					post_author,
+					commons_instance
+				FROM
+					posts
+				WHERE
+					commons_instance = " . $instance_id . "
+				ORDER BY
+					post_date desc";
+		
+		$result = mysql_query($sql);
+		
+		if(!$result) {
+			echo '<p class="fetch-error">Error retrieving posts</p>';
+		}
+		
+		else {
+			
+			if(mysql_num_rows($result) == 0) {
+				echo '<p class="empty">The bulletin at this commons is empty. Be the first to create a post!</p>';
+			}
+			
+			else {
+				// generate posts
+				while($row = mysql_fetch_assoc($result)) {
+					//select the associated user
+					$sql = "SELECT 
+						firstname,
+						lastname,
+						is_instructor
+					FROM
+						commons_users
+					WHERE
+						user_id = " . $row['post_author'];
+					 
+					$user_query = mysql_query($sql);
+					$poster = mysql_fetch_assoc($user_query);
+					
+					if($poster) {
+						$poster_name = $poster['firstname'] . " " . $poster['lastname'];
+					}
+					
+					else {
+						$poster_name = "Name error";
+					}
+					
+					//format date
+					$datestr = date("F j, g:i A", strtotime($row['post_date']));
+					
+					//begin post render
+					echo '<tr class="post';
+					if($user_id == $row['post_author']) {
+						echo ' user-post';
+					}
+					if($poster['is_instructor']) {
+						echo ' instructor-post';
+					}
+					echo '">
+						<td class="post-content">';
+						
+					// Output image to display on desktop
+					if(strlen($row['img_link'])) {
+						echo '<img class="desktop-img" src="' . $row['img_link'] . '" tabindex="0">';
+					}		
+					echo 	'<h3>' . htmlspecialchars($row['post_title']) . '</h3>
+							<p>' . htmlspecialchars($row['post_text']) . '</p>';
+					if(strlen($row['img_link'])) {
+						echo '<img class="mobile-img" src="' . $row['img_link'] . '" tabindex="0">';
+					}	
+					echo '</td>
+						<td class="post-info">
+							<div class="post-by">' . (($user_id == $row['post_author']) ? 'You' : $poster_name) . '</div>
+							<div class="post-date">' . $datestr . '</div>';
+					if($user_id == $row['post_author'] || $is_instructor) {
+						echo '<button class="delete-btn" pid="' . $row['post_id'] . '">Delete Post</button>';
+					}
+					echo '</td>
+					</tr>';
+				}
+			}
+		}
+		?>
+		</table>
+	</div>
+	
+	<form id="create-post" method="post" action="">
+		<h3>Create Post</h3>
+		<label for="title-input">Post Title</label>
+		<input id="title-input" name="post_title" type="text" placeholder="Enter post title" required autocomplete="off">
+		
+		<label for="content-input">Post Text</label>
+		<textarea id="content-input" name="post_text" placeholder="Enter post text" maxlength="300" rows="4" required></textarea>
+		
+		<label for="link-input">Image Link <span class="optional">(Optional)</span></label>
+		<input id="link-input" name="img_link" type="text" placeholder="Enter external image link" autocomplete="off">
+		<input type="submit" value="Submit Post">
+	
+	</form>
 
 </div>
+
+</div>
+<script src="js/graze.js"></script>
+</body>
+</html>

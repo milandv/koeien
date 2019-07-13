@@ -2,12 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login Form</title>
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
+<link href="css/loginmodule.css" rel="stylesheet" type="text/css" />
 <!--original style href="loginmodule.css"-->
 </head>
 <body>
 <p>&nbsp;</p>
+<div id="wrapper">
 <form id="loginForm" name="loginForm" method="post" action="login-exec.php">
   <table width="300" border="0" align="center" cellpadding="2" cellspacing="0">
     <tr>
@@ -27,6 +29,6 @@
 
 <p style="text-align: center">Don't have a login yet? Click <a href="register.php">here</a> to register.</p>
 <p style="text-align: center">Forgot your password? Go <a href="pwd_request.php">here</a> to request a password reset.</p>
-
+</div>
 </body>
 </html>

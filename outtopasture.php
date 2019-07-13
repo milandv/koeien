@@ -26,6 +26,7 @@
 <html>
 <head>
  <title><?PHP echo $commons_name ?></title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <style>
 	@import url(http://fonts.googleapis.com/css?family=Bowlby+One+SC);
 	@import url(http://fonts.googleapis.com/css?family=Inika:400,700);

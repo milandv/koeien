@@ -1,44 +1,73 @@
-        body    {font-family:Inika;background: url(../img/background.svg) no-repeat center center fixed;background-size: cover;}
-        h1      {font-family:'Bowlby One SC'}
-        #wrapper        {width:900px;
-                        margin:auto}
-        #top            {margin-bottom:4em}
-        #narrow         {width:495px;
-                        float:left}
-        #wide           {width:395px;
-                        float:right}
-        .box            {padding:1ex;
-                        border:1px solid black;
-                        margin-bottom:2em;
-                        background:white;}
-        .box h2         {margin-top:-1em;
-                        margin-left:5px;
-                        width:100px;
-                        background:white;
-                        text-align:center;}
-        table           {width:100%}
-        td + td               {text-align:right}
+* {
+	box-sizing: border-box;
+}
 
-        #submit         {background:black;color:white;font-weight:bold;font-family:inerit;font-size:125%;border:5px double white;cursor: hand; cursor: pointer;}
-        #submit:hover   {background:#888;}
+body {
+	font-family:Inika;
+	background: url(../img/background.svg) no-repeat center center fixed;
+	background-size: cover;
+}
 
-        #pasture        {border:1px solid black;width:3em;font-family:inherit}
+h1      {font-family:'Bowlby One SC'}
 
-        form div                            { overflow: hidden; margin: 0 0 5px 0; }
-        input[type=text]                    { float: left; width: 40px; font: bold 20px Helvetica, sans-serif; padding: 3px 0 0 0; text-align: center; }
-        .button                             { margin: 0 0 0 5px; text-indent: -9999px; cursor: pointer; width: 29px; height: 29px; float: left; text-align: center; background: url(../img/buttons.png) no-repeat; }
-        .dec                                { background-position: 0 -29px; }
+#top            {margin-bottom:4em}
 
-        #order_submitted        {color: red;}
-        #order_updated  {color: red; text-align: center;}
+#wrapper {
+	width: 92%;
+	margin:auto;
+}
+				
+@media only screen and (min-width: 1000px) {
+	#wrapper {
+		width:900px;	
+	}
+	
+	#narrow         {width:495px;
+					float:left}
+	#wide           {width:395px;
+					float:right}
+}
+				
+.box {
+	padding:12px;
+	border:1px solid #444;
+	border-radius: 2px;
+	margin-bottom:2em;
+	background:white;}
+.box h2         {margin-top:-1em;
+				margin-left:5px;
+				width:100px;
+				background:white;
+				border: 1px solid #bbb;
+				border-radius: 2px;
+				text-align:center;}
+				
 
-        .tweet {border: solid 1px black; padding: 10px;}
-        .tweetimg {float: left; margin-right: 20px;}
+				
+table           {width:100%}
 
-	.text_center {text-align: center}
-	.text_justify {text-align: justify}
-	.green {color: green}
-	.red {color: red}
+td + td               {text-align:right}
+
+#submit         {background:black;color:white;font-weight:bold;font-family:inerit;font-size:125%;border:5px double white;cursor: hand; cursor: pointer;}
+#submit:hover   {background:#888;}
+
+#pasture        {border:1px solid black;width:3em;font-family:inherit}
+
+form div                            { overflow: hidden; margin: 0 0 5px 0; }
+#pasture-box input[type=text]                    { float: left; width: 40px; font: bold 20px Helvetica, sans-serif; padding: 3px 0 0 0; text-align: center; }
+.button                             { margin: 0 0 0 5px; text-indent: -9999px; cursor: pointer; width: 29px; height: 29px; float: left; text-align: center; background: url(../img/buttons.png) no-repeat; }
+.dec                                { background-position: 0 -29px; }
+
+#order_submitted        {color: red;}
+#order_updated  {color: red; text-align: center;}
+
+.tweet {border: solid 1px black; padding: 10px;}
+.tweetimg {float: left; margin-right: 20px;}
+
+.text_center {text-align: center}
+.text_justify {text-align: justify}
+.green {color: green}
+.red {color: red}
 
 .cow {
     width:20%;
@@ -48,4 +77,213 @@
     
     left: 40%;
     padding-top: 30%;
+}
+
+#bulletin {
+	float: left;
+	width: 100%;
+}
+
+#posts-wrapper {
+	max-height: 450px;
+	overflow: auto;
+	width: 100%;
+	border: 1px solid #ccc;
+	margin-bottom: 15px;
+	background-color: #f8fafc;
+}
+
+@media only screen and (min-width: 600px) {
+	#posts-wrapper {
+		max-height: 540px;
+	}
+}
+
+#posts {
+	width: 100%;
+	position: relative;
+	border-collapse: collapse;
+}
+
+.post {
+	position: relative;
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+}
+.post:last-child {
+	border-bottom: none;
+}
+
+
+.post > * {
+	padding: 10px;
+}
+
+.post-content h3 { 
+	margin: 0 0 10px;
+	
+ }
+
+.post-content p {
+	margin: 0;
+}
+
+.mobile-img {
+	width: 100%;
+	margin-top: 8px;
+}
+.desktop-img {
+	max-height: 90px;
+	width: auto;
+	max-width: 160px;
+	float: right;
+	clear: none;
+	margin-left: 10px;
+	transition: 0.3s;
+}
+.desktop-img:hover,
+.desktop-img:focus,
+.desktop-img:active {
+	max-height: 1000px;
+	width: 100%;
+	max-width: 100%;
+	margin-left: 0;
+	margin-bottom: 8px;
+}
+
+.desktop-img {
+	display: none;
+}
+
+@media only screen and (min-width: 800px) {
+	.desktop-img {
+		display: block;
+	}
+	.mobile-img {
+		display: none;
+	}
+}
+
+.post-info {
+	width: 165px;
+	position: relative;
+	vertical-align: middle;
+	background-color: rgba(0, 0, 0, 0.0275)
+}
+
+.post-info > * {
+	font-size: 85%;
+	text-align: center;
+}
+
+@media only screen and (max-width: 599px) {
+	.post-content, .post-info {
+		width: 100%;
+		display: block;
+		border-right: none;
+	}
+}
+.delete-btn {
+	padding: 3px 6px;
+	margin: 5 auto 0;
+	display: block;
+	background-color: #f2f5f7;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	text-decoration: none;
+	cursor: pointer;
+}
+.delete-btn:hover,
+.delete-btn:focus {
+	background-color: #ccc;
+}
+
+/* User/instructor styling */
+.post.user-post {
+	background-color: #f0f4fc;
+}
+.post.instructor-post {
+	background-color: #fdfbe8 !important;
+}
+.instructor-post h3::after {
+	content: " Instructor\00a0Post";
+	font-weight: normal;
+	font-size: 80%;
+	color: #726a20;
+}
+.user-post .post-by {
+	font-weight: bold;
+	color: #20368b;
+}
+.user-post.instructor-post .post-by {
+	color: #726a20;
+}
+
+
+p.empty, p.fetch-error, p.post-success {
+	text-align: center;
+	margin: 10 auto;
+}
+
+/* Form styling */
+#bulletin form {
+	margin: 0 auto;
+}
+
+#bulletin form > * {
+	display: block;
+	margin-top: 0;
+	border-radius: 3px;
+}
+
+#bulletin form h3 {
+	text-align: center;
+}
+
+#bulletin label {
+	margin-bottom: 4px;
+	font-size: 95%;
+	font-weight: bold;
+}
+label .optional {
+	font-weight: normal;
+	font-size: 80%;
+}
+
+#bulletin input,
+textarea {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	transition: 0.3s;
+	resize: none;
+	font-family: inherit;
+}
+
+#bulletin input[type=text]:hover,
+#bulletin input[type=text]:focus,
+#bulletin input[type=text]:active,
+textarea:hover,
+textarea:focus,
+textarea:active {
+	border-color: #00b1ff;
+}
+
+
+
+#bulletin input[type=submit] {
+	background-color: #f2f5f7;
+	transition: 0s;
+}
+#bulletin input[type=submit]:hover,
+#bulletin input[type=submit]:focus {
+	background-color: #ccc;
+	cursor: pointer;
+}
+
+@media only screen and (min-width: 1000px) {
+	#bulletin form {
+		width: 500px;
+	}
 }

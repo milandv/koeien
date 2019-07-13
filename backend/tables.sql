@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS commons_global_health;
 DROP TABLE IF EXISTS commons_global_stats;
 DROP TABLE IF EXISTS commons_grazing_orders;
 DROP TABLE IF EXISTS commons_login_log;
+DROP TABLE IF EXISTS posts;
 
 CREATE TABLE commons_instances (
  instance_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -38,6 +39,7 @@ CREATE TABLE commons_users (
  login VARCHAR(100),
  email VARCHAR(100),
  passwd VARCHAR(32),
+ is_instructor INT DEFAULT 0,
  approved INT DEFAULT 1,
  ts TIMESTAMP
 );
@@ -145,7 +147,7 @@ CREATE TABLE commons_grazing_orders (
 CREATE TABLE commons_login_log (
  login_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
  user_id INT,
- ts TIMESTAMP DEFAULT CURRENT_TIMESTMAP,
+ ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
  KEY u (user_id)
 );
 
@@ -155,4 +157,19 @@ CREATE TABLE commons_reset_requests (
  hash VARCHAR(20),
  ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE posts (
+post_id				INT(8) NOT NULL AUTO_INCREMENT,
+post_title			TEXT NOT NULL,
+post_text			TEXT NOT NULL,
+img_link			VARCHAR(300),
+post_date			DATETIME NOT NULL,
+post_author			INT NOT NULL,
+commons_instance	INT NOT NULL,
+PRIMARY KEY (post_id)
+);
+
+ALTER TABLE posts ADD FOREIGN KEY(post_author) REFERENCES commons_users(user_id) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE posts ADD FOREIGN KEY(commons_instance) REFERENCES commons_instances(instance_id) ON DELETE RESTRICT ON UPDATE CASCADE;
 

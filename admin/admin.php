@@ -61,7 +61,7 @@
 	}
 	if ($adjustment_factor<0) { $adjustment_factor=0; }
 
-	if ($_POST["submit"]) {
+	if (isset($_POST['new_health'])) {
 		$new_health = $_POST['new_health'];
 		if ($new_health>=0 && $new_health<=100) {
 			$check_qry = mysql_query("SELECT * FROM commons_global_stats WHERE ts='$today'");
@@ -71,6 +71,23 @@
 			} else {
 				$qry = mysql_query("INSERT INTO commons_global_stats (instance_id, ts, commons_size, global_health, self_set) VALUES ($instance_id, '$today', $new_commons_size, '$new_health', 1)");
 			}
+		}
+		
+		header('Location: ' . $_SERVER['REQUEST_URI']);
+		exit();	
+	}
+	
+	if(isset($_POST['is_instructor'])) {
+		$sql = "UPDATE commons_users SET is_instructor=" . $_POST['is_instructor'] . " WHERE user_id=" . $_POST['uid'];
+		
+		$result = mysql_query($sql);
+		
+		if(!$result) {
+			echo 'Error updating user';
+		}
+		else {
+			header('Location: ' . $_SERVER['REQUEST_URI']);
+			exit();	
 		}
 	}
 	
@@ -125,22 +142,8 @@ $(document).ready(function(){
 });
 </script>
 
-
- <style type="text/css">
-        table.nonmain {border-collapse:collapse;
-                        background:#EFF4FB url(http://www.roscripts.com/images/teaser.gif) repeat-x;
-                        font:0.8em/145% 'Trebuchet MS',helvetica,arial,verdana;
-                        color: #333;
-                        }
-
-        table.nonmain {border:1px solid black;}
-        table.nonmain td, table.nonmain th {border:1px solid black; padding: 2px;}
-
-        table.nonmain tbody tr{ background:#fafafa}
-
-	#graph1 {width: 410px; float: left;}
-	#graph2 {width: 410px; float: left; margin-left: 20px;}
- </style>
+<link rel="stylesheet" type="text/css" href="../css/style_admin.css">
+ 
 </head>
 
 <body>
@@ -156,7 +159,7 @@ $(document).ready(function(){
 <?PHP 
 	$qry = mysql_query("SELECT IF(ts = '$today', 'Today', DATE_FORMAT(ts, '%a, %b. %D')) as date, commons_size, global_health FROM commons_global_stats WHERE instance_id=$instance_id");
 	while ($row = mysql_fetch_array($qry)) {
-		$per_capacity = number_format(100*$row[commons_size]/$capacity, 2);
+		$per_capacity = number_format(100*$row['commons_size']/$capacity, 2);
 		echo <<<EOT
 <tr>
  <td>$row[date]</td>
@@ -236,6 +239,45 @@ EOT;
 	}
 ?>
 </table>
+
+<h4>Students</h4>
+<table class="nonmain">
+	<tr>
+		<th>User ID</th><th>Student ID</th><th>Name</th><th>Status</th>
+	</tr>
+
+<?PHP
+$sql = "SELECT user_id, student_id, firstname, lastname, is_instructor FROM commons_users
+	WHERE instance_id=" . $instance_id;
+
+$result = mysql_query($sql);
+
+if(!$result) {
+	echo 'Error fetching students';
+}
+
+else {
+	while($row = mysql_fetch_assoc($result)) {
+		echo '<tr>
+			<td>' . $row['user_id'] . '</td>
+			<td>' . $row['student_id'] . '</td>
+			<td>' . $row['firstname'] . ' ' . $row['lastname'] .'</td>
+			<td><form action="" method="POST">
+				<select name="is_instructor">
+					<option value="0">Student</option>
+					<option value="1"' . ($row['is_instructor'] ? ' selected' : '') . '>Instructor</value>
+				</select>
+				<button type="submit" name="uid" value="' . $row['user_id'] .'">Update</button>
+			</form></td>
+			</tr>';
+	}
+}
+
+?>
+
+</table>
+<br>
+
 
 </body>
 </html>

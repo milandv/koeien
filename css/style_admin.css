@@ -1,0 +1,24 @@
+table.nonmain {border-collapse:collapse;
+                        background:#EFF4FB url(http://www.roscripts.com/images/teaser.gif) repeat-x;
+                        font:0.8em/145% 'Trebuchet MS',helvetica,arial,verdana;
+                        color: #333;
+                        }
+
+        table.nonmain {border:1px solid black;}
+table.nonmain td, table.nonmain th {
+	border:1px solid black;
+	padding: 4px 8px;
+	vertical-align: middle;
+}
+
+table.nonmain tbody tr{
+			background:#fafafa;
+			position: relative;
+}
+
+#graph1 {width: 410px; float: left;}
+#graph2 {width: 410px; float: left; margin-left: 20px;}
+
+table.nonmain td form {
+	margin: 0;
+}
